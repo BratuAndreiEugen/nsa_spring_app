@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    masterdb:
+      jdbc-url: jdbc:postgresql://${POSTGRES_MASTER_DB}/nsadb
+      username: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+      driver-class-name: org.postgresql.Driver
+    slave-1-db:
+      jdbc-url: jdbc:postgresql://${POSTGRES_SLAVE_DB}/nsadb
+      username: ${POSTGRES_USER}
+      password: ${POSTGRES_PASSWORD}
+      driver-class-name: org.postgresql.Driver
+  mail:
+    host: localhost
+    port: 1025
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+    username: none
+    password: none
+    address: no-reply@andrei-nsa.duckdns.org
+
+jwt:
+  expiration: 24
+  auth-header: App-Auth
+  secret: ${JWT_SECRET}
+

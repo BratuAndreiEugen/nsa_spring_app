@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: nsaSpringApp
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8090

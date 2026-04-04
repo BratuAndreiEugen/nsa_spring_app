@@ -1,5 +1,6 @@
 package com.nsa.nsa_spring_app.web;
 
+import com.nsa.nsa_spring_app.config.security.annot.AllowAdminOnly;
 import com.nsa.nsa_spring_app.config.security.jwt.JWTService;
 import com.nsa.nsa_spring_app.model.User;
 import com.nsa.nsa_spring_app.model.enums.UserRole;
@@ -12,6 +13,8 @@ import com.nsa.nsa_spring_app.web.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/access")
@@ -32,6 +35,7 @@ public class AccessController {
                     .fullName(userDto.getFullName())
                     .phoneNumber(userDto.getPhoneNumber())
                     .jwt(jwt)
+                    .id(userDto.getId())
                     .build());
         }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
@@ -57,7 +61,19 @@ public class AccessController {
                     .fullName(userDto.getFullName())
                     .phoneNumber(userDto.getPhoneNumber())
                     .jwt(jwt)
+                    .id(userDto.getId())
                     .build());
+        }catch (Exception e){
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
+    @AllowAdminOnly
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable UUID id){
+        try {
+            userService.deleteUser(id);
+            return ResponseEntity.ok().build();
         }catch (Exception e){
             return ResponseEntity.status(500).body(e.getMessage());
         }

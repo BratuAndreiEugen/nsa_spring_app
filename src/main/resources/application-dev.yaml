@@ -11,14 +11,14 @@ spring:
       password: ${POSTGRES_PASSWORD}
       driver-class-name: org.postgresql.Driver
   mail:
-    host: localhost
+    host: ${SMTP_HOST}
     port: 1025
     properties:
       mail.smtp.auth: false
       mail.smtp.starttls.enable: false
-    username: none
-    password: none
-    address: no-reply@andrei-nsa.duckdns.org
+    username: ${SMTP_USERNAME}
+    password: ${SMTP_PASSWORD}
+    address: ${SMTP_ADDRESS}
 
 jwt:
   expiration: 24
